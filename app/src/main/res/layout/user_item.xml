@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="user" type="com.liangfeizc.databinding.model.User" />
+
+        <import type="com.liangfeizc.databinding.sample.dynamic.UserCellVM" />
+
+        <variable
+            name="viewModel"
+            type="UserCellVM" />
     </data>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="5dp">
 
-        <TextView
-            android:text="@{user.firstName}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{viewModel.onContentClicked}"
+            android:orientation="horizontal">
 
-        <TextView
-            android:text="@{user.lastName}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{viewModel.position+", "}'
+                tools:text="FirstName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.user.firstName}"
+                tools:text="FirstName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.user.lastName}"
+                tools:text="LastName" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </layout>
